@@ -317,7 +317,7 @@ def euler_3Loop(theta0,m,r,c,tol=0.001):
     for i in range(len(t)-1):
         omega[i+1] = omega[i] + alpha[i] * dt
         theta[i+1] = theta[i] + omega[i] * dt
-        if my_s > (c*np.sin(theta[i]))/(-2*np.cos(theta[0]+(c+3)*np.cos(theta[i]))):
+        if my_s > (c*np.sin(theta[i]))/(-2*np.cos(theta[0])+(c+3)*np.cos(theta[i])):
             alpha[i+1] = (g*sin(theta[i]))/(r*(c+1)) #da har vi ren rulling og samme alpha som i opp2
         else:
             alpha[i+1] = (g/(r))*(np.sin(theta[i])-my_k*np.cos(theta[i]))+my_k*omega[i]**2
@@ -329,7 +329,18 @@ def euler_3Loop(theta0,m,r,c,tol=0.001):
     
     
    
-print(euler_3Loop(0.0001,m_sylinder_fast,r_sylinder_fast,c_sylinder_fast,tol=0.001))
+print("sylinder hul: ")
+print("vinkel 0: ", euler_3Loop(0.0001,m_sylinder_hul,r_sylinder_hul,c_sylinder_hul,tol=0.001))
+print("vinkel 20.8: ", euler_3Loop(20.8*pi/180,m_sylinder_hul,r_sylinder_hul,c_sylinder_hul,tol=0.001))
+print("vinkel 42.6: ", euler_3Loop(42.4*pi/180,m_sylinder_hul,r_sylinder_hul,c_sylinder_hul,tol=0.001))
+print("sylinder fast: ")
+print("vinkel 0: ", euler_3Loop(0.0001,m_sylinder_fast,r_sylinder_fast,c_sylinder_fast,tol=0.001))
+print("vinkel 20.0: ", euler_3Loop(20.0*pi/180,m_sylinder_fast,r_sylinder_fast,c_sylinder_fast,tol=0.001))
+print("vinkel 42.6: ", euler_3Loop(42.4*pi/180,m_sylinder_fast,r_sylinder_fast,c_sylinder_fast,tol=0.001)) 
+print("kompakt kule: ")
+print("vinkel 0: ", euler_3Loop(0.0001,m_kule,r_kule,c_kule,tol=0.001))
+print("vinkel 20.8: ", euler_3Loop(20.8*pi/180,m_kule,r_kule,c_kule,tol=0.001))
+print("vinkel 42.6: ", euler_3Loop(42.4*pi/180,m_kule,r_kule,c_kule,tol=0.001)) 
  
     
 #    for j in range(len(theta_l)):
@@ -349,7 +360,13 @@ print(euler_3Loop(0.0001,m_sylinder_fast,r_sylinder_fast,c_sylinder_fast,tol=0.0
 # In[298]:
 
 
-print("vinkel 0: ", euler_3(0.0001,m_sylinder_fast,r_sylinder_fast,c_sylinder_fast))
+
+    
+    
+
+
+
+#print("vinkel 0: ", euler_3(0.0001,m_sylinder_fast,r_sylinder_fast,c_sylinder_fast))
 #print("vinkel 20.0: ", euler_3(20.0*pi/180,m_sylinder_fast,r_sylinder_fast,c_sylinder_fast))
 #print("vinkel 42.4: ", euler_3(42.4*pi/180,m_sylinder_fast,r_sylinder_fast,c_sylinder_fast))
 
