@@ -37,49 +37,54 @@ m_sylinder_fast = 1.795
 tN = 100000         # N tidssteg
 
 
+my_s = 0.5     # intervall funnet på internett (0.5,0.6)
+my_k = 0.5     # intervall funnet på internett (0.4,0.6)
+
+
+
 # #### Funksjon for eulers metode opg 1
 
 # In[240]:
 
 
-def euler_opg1(theta0,m,r,tol=0.01): # euler med sum av krefter betraktning
-    r += r_halvkule  # slik at lille r er (r+R)
-    
-    # tid
-    global t                    # til evt plotting 
-    t_total = 7                # sekunder
-    t = linspace(0,t_total,tN)  # tidsdiskretisering (array)
-    dt = t[1]-t[0]              # tidssteg
-    
-    # arrayer for relevante verdier
-    theta = zeros(len(t))       # vinkel, theta per tid
-    omega = zeros(len(t))       # vinkelfart, omega per tid
-    alpha = zeros(len(t))       # vinkel aksellerasjon, (g*sin(theta0))/(R+r)
-    
-    # initialisering
-    theta[0] = theta0
-    omega[0] = 0
-    alpha[0] = (g*sin(theta0))/(r)  
-    
-    # kritisk vinkel
-    thetakrit = 0
-    
-    # mutasjoner av eulersmetode 
-    for i in range(len(t)-1):
-        omega[i+1] = omega[i] + alpha[i] * dt
-        theta[i+1] = theta[i] + omega[i] * dt
-        alpha[i+1] = (g*sin(theta[i]))/(r)
-        #print(theta[i])
-        
-        v = sqrt((cos(theta0)-cos(theta[i]))*2*g*(r))           # (r+R)*omega[i], ## fart gitt ved theta/ omega
-        sumf = (-(v**2)/(r) + g*cos(theta[i]))    # summen av krefter
-        
-        if -tol < sumf < tol:      # sjekker om summ av krefter er nære null
-            thetakrit = theta[i]
-            break
-
-        
-    return thetakrit*180/pi
+#def euler_opg1(theta0,m,r,tol=0.01): # euler med sum av krefter betraktning
+#    r += r_halvkule  # slik at lille r er (r+R)
+#    
+#    # tid
+#    global t                    # til evt plotting 
+#    t_total = 7                # sekunder
+#    t = linspace(0,t_total,tN)  # tidsdiskretisering (array)
+#    dt = t[1]-t[0]              # tidssteg
+#    
+#    # arrayer for relevante verdier
+#    theta = zeros(len(t))       # vinkel, theta per tid
+#    omega = zeros(len(t))       # vinkelfart, omega per tid
+#    alpha = zeros(len(t))       # vinkel aksellerasjon, (g*sin(theta0))/(R+r)
+#    
+#    # initialisering
+#    theta[0] = theta0
+#    omega[0] = 0
+#    alpha[0] = (g*sin(theta0))/(r)  
+#    
+#    # kritisk vinkel
+#    thetakrit = 0
+#    
+#    # mutasjoner av eulersmetode 
+#    for i in range(len(t)-1):
+#        omega[i+1] = omega[i] + alpha[i] * dt
+#        theta[i+1] = theta[i] + omega[i] * dt
+#        alpha[i+1] = (g*sin(theta[i]))/(r)
+#        #print(theta[i])
+#        
+#        v = sqrt((cos(theta0)-cos(theta[i]))*2*g*(r))           # (r+R)*omega[i], ## fart gitt ved theta/ omega
+#        sumf = (-(v**2)/(r) + g*cos(theta[i]))    # summen av krefter
+#        
+#        if -tol < sumf < tol:      # sjekker om summ av krefter er nære null
+#            thetakrit = theta[i]
+#            break
+#
+#        
+#    return thetakrit*180/pi
 
 
 # #### kjøring av kode
@@ -87,12 +92,12 @@ def euler_opg1(theta0,m,r,tol=0.01): # euler med sum av krefter betraktning
 # In[241]:
 
 
-kule = euler_opg1(0.35325464060365225,m_kule,r_kule)
-print('kule:', kule)
-sylinder_hul = euler_opg1(0.35325464060365225,m_sylinder_hul,r_sylinder_hul)
-print('sylinder:',sylinder_hul)
-sylinder_fast = euler_opg1(0.001,m_sylinder_fast,r_sylinder_fast)
-print(sylinder_fast)
+#kule = euler_opg1(0.35325464060365225,m_kule,r_kule)
+#print('kule:', kule)
+#sylinder_hul = euler_opg1(0.35325464060365225,m_sylinder_hul,r_sylinder_hul)
+#print('sylinder:',sylinder_hul)
+#sylinder_fast = euler_opg1(0.001,m_sylinder_fast,r_sylinder_fast)
+#print(sylinder_fast)
 
 
 # ## Oppgave 2
@@ -156,10 +161,10 @@ def euler_opg2(theta0,m,r,c,tol=0.01): # euler med sum av krefter betraktning
 # In[244]:
 
 
-kule = euler_opg2(20.8*pi/180,m_kule,r_kule,c_kule)
-print('kule:', kule[0])
-sylinder_hul = euler_opg2(20.8*pi/180,m_sylinder_hul,r_sylinder_hul,c_sylinder_hul)
-print('sylinder:',sylinder_hul[0])
+#kule = euler_opg2(20.8*pi/180,m_kule,r_kule,c_kule)
+#print('kule:', kule[0])
+#sylinder_hul = euler_opg2(20.8*pi/180,m_sylinder_hul,r_sylinder_hul,c_sylinder_hul)
+#print('sylinder:',sylinder_hul[0])
 
 
 # In[259]:
@@ -193,7 +198,7 @@ def sammen_ligne(m,r,c,tol=0.01):
 # In[260]:
 
 
-sammenligne = sammen_ligne(m_kule,r_kule,c_kule)
+#sammenligne = sammen_ligne(m_kule,r_kule,c_kule)
 
 
 # ## Oppgave 3
@@ -204,9 +209,6 @@ sammenligne = sammen_ligne(m_kule,r_kule,c_kule)
 
 # In[206]:
 
-
-my_s = 0.6     # intervall funnet på internett (0.5,0.6)
-my_k = 0.5     # intervall funnet på internett (0.4,0.6)
 
 
 # In[292]:
@@ -278,7 +280,7 @@ def euler_3(theta0,m,r,c,tol=0.001):
             theta_s = theta_l[j]
             #print(theta_s*180/pi)
             if printOnce==True:
-                print(theta_s*180/pi);
+                print("slure vinkel: ", theta_s*180/pi);
                 printOnce=False
             break
             
@@ -287,11 +289,69 @@ def euler_3(theta0,m,r,c,tol=0.001):
     return ren_sluring
 
 
+def euler_3Loop(theta0,m,r,c,tol=0.001):
+    r += r_halvkule     # slik at lille r er (r+R)
+    
+    # tid
+    global t                    # til evt plotting 
+    t_total = 7                 # sekunder
+    t = linspace(0,t_total,tN)  # tidsdiskretisering (array)
+    dt = t[1]-t[0]              # tidssteg
+    
+    # arrayer for relevante verdier
+    theta = zeros(len(t))       # vinkel, theta per tid
+    omega = zeros(len(t))       # vinkelfart, omega per tid
+    alpha = zeros(len(t))           # vinkel aksellerasjon, (g*sin(theta0))/(R+r)
+    
+    # initialisering
+    theta[0] = theta0
+    omega[0] = 0
+    alpha[0] = (g*sin(theta0))/(r*(c+1)) 
+    
+    # kritisk vinkel
+    thetakrit = 0
+
+    theta_s = 0
+    printOnce = True    
+    # mutasjoner av eulersmetode 
+    for i in range(len(t)-1):
+        omega[i+1] = omega[i] + alpha[i] * dt
+        theta[i+1] = theta[i] + omega[i] * dt
+        if my_s > (c*np.sin(theta[i]))/(-2*np.cos(theta[0]+(c+3)*np.cos(theta[i]))):
+            alpha[i+1] = (g*sin(theta[i]))/(r*(c+1)) #da har vi ren rulling og samme alpha som i opp2
+        else:
+            alpha[i+1] = (g/(r))*(np.sin(theta[i])-my_k*np.cos(theta[i]))+my_k*omega[i]**2
+        
+        if -omega[i]**2*r+g*np.cos(theta[i])<=0:
+            print("Corect ans: ", theta[i]*180/pi)
+            return theta[i]*180/pi;
+    
+    
+    
+   
+print(euler_3Loop(0.0001,m_sylinder_fast,r_sylinder_fast,c_sylinder_fast,tol=0.001))
+ 
+    
+#    for j in range(len(theta_l)):
+#        if my_s <= (c*sin(theta_l[j]))/(-2*cos(theta_l[0]+(c+3)*cos(theta_l[j]))): #(c*sin(theta_l[j]))/((c+3)*cos(theta_l[j])-2):
+#            theta_s = theta_l[j]
+#            #print(theta_s*180/pi)
+#            if printOnce==True:
+#                print("slure vinkel: ", theta_s*180/pi);
+#                printOnce=False
+#            break
+#            
+#    ren_sluring = euler_opg1_mf(theta_s,m,r,c)
+#    
+#    return ren_sluring
+
+
 # In[298]:
 
 
-print(euler_3(42.4*pi/180,m_sylinder_hul,r_sylinder_hul,c_sylinder_hul))
-
+print("vinkel 0: ", euler_3(0.0001,m_sylinder_fast,r_sylinder_fast,c_sylinder_fast))
+#print("vinkel 20.0: ", euler_3(20.0*pi/180,m_sylinder_fast,r_sylinder_fast,c_sylinder_fast))
+#print("vinkel 42.4: ", euler_3(42.4*pi/180,m_sylinder_fast,r_sylinder_fast,c_sylinder_fast))
 
 # In[ ]:
 
